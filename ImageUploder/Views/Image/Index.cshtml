@@ -1,0 +1,77 @@
+﻿
+
+@{
+    ViewBag.Title = "Image Uploder";
+}
+<br/>
+<br />
+<div class="panel panel-primary">
+   
+    <div class="panel-heading"> <i class="glyphicon glyphicon-picture"></i>  Image Uploader</div>
+    <div class="panel-body">
+
+      @*Info Messages start*@
+        <div id="infosuccess" style="display:none;">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Info!</strong> Image has been uploaded Successfully
+                </div>
+        </div>
+        <div id="infoerror" style="display:none;">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Error!</strong> Error Will uploading Image 
+                <div id="errorId">
+                </div>
+                
+            </div>
+        </div>
+        @*Info Messages End*@
+
+        @*Upload*@
+        <input type="file" id="UploadImg" />
+        <br/>
+        @*Preview*@
+        <img id="imgPreview"  width="150" class="thumbnail" style="display:none;" />
+    </div>
+</div>
+
+        @section Scripts {
+            <script>
+                $("#UploadImg").change(function () {
+                    var data = new FormData();
+                    var files = $("#UploadImg").get(0).files;
+                    if (files.length > 0) {
+                        data.append("MyImages", files[0]);
+                    }
+
+                    $.ajax({
+                        url: "/Image/UploadFile",
+                        type: "POST",
+                        processData: false,
+                        contentType: false,
+                        data: data,
+                        success: function (response) {
+                            //code after success
+                            $("#imgPreview").show();
+                            $("#imgPreview").attr('src', '/Upload/' + response);
+                            $("#infosuccess").show();
+                            setTimeout(function () {
+                             $("#infosuccess").remove();
+                            }, 5000);
+                        },
+                        error: function (er) {
+                            $("#infoerror").show();
+                            $("#errorId").text(er);
+                            setTimeout(function () {
+                                $("#infoerror").remove();
+                            }, 5000);
+                            alert(er);
+                        }
+
+                    });
+
+                });
+
+            </script>
+        }

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ImageUploader.Data.TbImage>
+
+@{
+    ViewBag.Title = "Image Gallary";
+}
+
+<h2><i class="glyphicon glyphicon-picture"></i>Image Gallary</h2>
+
+<p>
+    @Html.ActionLink("Upload New", "Index")
+</p>
+
+
+
+<div class="gallery cf">
+    @foreach (var item in Model)
+    {
+
+        <div>
+           
+                <img src="~/Upload/@item.Imagepath" />
+                @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                <a href="~/Upload/@item.Imagepath"><i class="btn btn-primary glyphicon glyphicon-fullscreen"></i></a>
+        </div>
+
+
+
+    }
+</div>
+        

@@ -1,0 +1,33 @@
+﻿USE [master]
+GO
+
+/****** Object:  Database [ImageUploaderDB]    Script Date: 3/11/2017 5:20:41 PM ******/
+CREATE DATABASE [ImageUploaderDB]
+ GO
+
+
+ USE [ImageUploaderDB]
+GO
+
+/****** Object:  Table [dbo].[TbImages]    Script Date: 3/11/2017 5:21:53 PM ******/
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE TABLE [dbo].[TbImages](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Imagepath] [nvarchar](max) NULL,
+	[Size] [int] NULL,
+ CONSTRAINT [PK_TbImages] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
